@@ -189,6 +189,16 @@ namespace urdf_geometry_parser{
         ROS_ERROR_STREAM(link_name << " couldn't be retrieved from model description");
         return false;
       }
+      if (!link->collision)
+      {
+        ROS_ERROR_STREAM("Link " << link_name << " does not have collision description. Add collision description for link to urdf.");
+        return false;
+      }
+      if (!link->collision->geometry)
+      {
+        ROS_ERROR_STREAM("Link " << link_name << " does not have collision geometry description. Add collision geometry description for link to urdf.");
+        return false;
+      }
       geometry = link->collision->geometry;
       return true;
     }
