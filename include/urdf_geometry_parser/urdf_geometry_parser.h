@@ -79,13 +79,22 @@ public:
                                 double& radius);
 
   /**
-   * \brief Get link geometry from the URDF
+   * \brief Get link collision geometry from the URDF
    * \param link_name Name of the link
    * \param geometry Geometry of the link
    * \return true if the geometry was found; false otherwise
    */
   bool getLinkCollisionGeometry(const std::string& link_name,
                                 urdf::GeometrySharedPtr& geometry);
+
+  /**
+   * \brief Get link visual geometry from the URDF
+   * \param link_name Name of the link
+   * \param geometry Geometry of the link
+   * \return true if the geometry was found; false otherwise
+   */
+  bool getLinkVisualGeometry(const std::string& link_name,
+                             urdf::GeometrySharedPtr& geometry);
 
   /**
    * \brief Get joint steering limit from the URDF
