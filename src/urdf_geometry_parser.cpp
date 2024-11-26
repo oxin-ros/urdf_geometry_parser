@@ -53,19 +53,19 @@ namespace urdf_geometry_parser{
 
     if (!link->collision)
     {
-      ROS_ERROR_STREAM("Link " << link->name << " does not have collision description. Add collision description for link to urdf.");
+      ROS_WARN_STREAM("Link " << link->name << " does not have collision description. Add collision description for link to urdf.");
       return false;
     }
 
     if (!link->collision->geometry)
     {
-      ROS_ERROR_STREAM("Link " << link->name << " does not have collision geometry description. Add collision geometry description for link to urdf.");
+      ROS_WARN_STREAM("Link " << link->name << " does not have collision geometry description. Add collision geometry description for link to urdf.");
       return false;
     }
 
     if (link->collision->geometry->type != urdf::Geometry::CYLINDER)
     {
-      ROS_ERROR_STREAM("Link " << link->name << " does not have cylinder geometry");
+      ROS_WARN_STREAM("Link " << link->name << " does not have cylinder geometry");
       return false;
     }
 
@@ -82,7 +82,7 @@ namespace urdf_geometry_parser{
   {
     if (!isCylinder(wheel_link))
     {
-      ROS_ERROR_STREAM("Wheel link " << wheel_link->name << " is NOT modeled as a cylinder!");
+      ROS_WARN_STREAM("Wheel link " << wheel_link->name << " is NOT modeled as a cylinder!");
       return false;
     }
 
@@ -100,13 +100,13 @@ namespace urdf_geometry_parser{
     std::string robot_model_str="";
     if (!res || !root_nh.getParam(model_param_name,robot_model_str))
     {
-      ROS_ERROR("Robot descripion couldn't be retrieved from param server.");
+      ROS_ERROR("Robot description couldn't be retrieved from param server.");
     }
     else
     {
       model_ = urdf::parseURDF(robot_model_str);
       if(!model_)
-        ROS_ERROR_STREAM("Could not parse the urdf robot model "<<model_param_name);
+        ROS_ERROR_STREAM("Could not parse the URDF robot model "<<model_param_name);
     }
   }
 
@@ -191,12 +191,12 @@ namespace urdf_geometry_parser{
       }
       if (!link->collision)
       {
-        ROS_ERROR_STREAM("Link " << link_name << " does not have collision description");
+        ROS_WARN_STREAM("Link " << link_name << " does not have collision description");
         return false;
       }
       if (!link->collision->geometry)
       {
-        ROS_ERROR_STREAM("Link " << link_name << " does not have collision geometry description");
+        ROS_WARN_STREAM("Link " << link_name << " does not have collision geometry description");
         return false;
       }
       geometry = link->collision->geometry;
@@ -219,12 +219,12 @@ namespace urdf_geometry_parser{
       }
       if (!link->visual)
       {
-        ROS_ERROR_STREAM("Link " << link_name << " does not have visual description");
+        ROS_WARN_STREAM("Link " << link_name << " does not have visual description");
         return false;
       }
       if (!link->visual->geometry)
       {
-        ROS_ERROR_STREAM("Link " << link_name << " does not have visual geometry description");
+        ROS_WARN_STREAM("Link " << link_name << " does not have visual geometry description");
         return false;
       }
       geometry = link->visual->geometry;
